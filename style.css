@@ -22,19 +22,18 @@ button {
   cursor: pointer;
 }
 
-h2 {
+h1 {
   color: var(--secondary-color-700);
   font-size: var(--font-size-big);
   font-weight: var(--font-weight-big);
   line-height: 140%;
   letter-spacing: 0.05rem;
-  white-space: nowrap;
-  overflow: hidden;
 }
 
 a {
   text-decoration: none;
   color: inherit;
+  text-align: center;
 }
 
 .inner1 {
@@ -62,13 +61,13 @@ img.logo {
   width: 10rem;
 }
 
-button.btn {
+a.btn {
   background-color: var(--primary-color-100);
   border-radius: var(--border-radius);
 }
 
-button.login {
-  padding: 0.5rem 1.43rem;
+a.login {
+  padding: 1rem 2.5rem;
 
   color: var(--secondary-color-100);
   font-size: 1rem;
@@ -98,7 +97,7 @@ section.main-visual {
   top: 80px;
 }
 
-section.main-visual h2 {
+section.main-visual h1 {
   color: var(--secondary-color-700);
   font-size: var(--font-size-big);
   font-weight: var(--font-weight-big);
@@ -107,11 +106,11 @@ section.main-visual h2 {
   line-height: 3.6rem;
 }
 
-button.search {
+a.search {
   color: var(--secondary-color-50);
   font-size: 1.25rem;
   font-weight: 600;
-  padding: 0.8rem;
+  padding: 1.2rem 5rem;
   border-radius: 9999px;
 }
 .inner2 .main-visual-img {
@@ -141,7 +140,7 @@ button.search {
   align-items: left;
 }
 
-.content h2 {
+.content h1 {
   margin-top: 1.4rem;
   margin-bottom: 1rem;
 }
@@ -180,7 +179,7 @@ section:nth-child(3) .inner3 {
   height: 24.8125rem;
 }
 
-.bottom h2 {
+.bottom h1 {
   align-self: center;
   padding-top: 5rem;
 }
