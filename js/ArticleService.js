@@ -16,19 +16,20 @@ function checkValidId(articleId) {
   }
 }
 
+// 파라미터의 기본값을 어떻게 주는 것이 상황에 적절할까
 function getArticleList(
   { page = 1, pageSize = 10, keyword } = { page: 1, pageSize: 10 },
 ) {
-  const articleUrl = new URL(BASE_URL);
-  articleUrl.searchParams.set("page", page);
-  articleUrl.searchParams.set("pageSize", pageSize);
-  keyword && articleUrl.searchParams.set("keyword", keyword);
+  const url = new URL(BASE_URL);
+  url.searchParams.set("page", page);
+  url.searchParams.set("pageSize", pageSize);
+  keyword && url.searchParams.set("keyword", keyword);
 
-  return fetch(articleUrl).then((response) => {
+  return fetch(url).then((response) => {
     checkValidResponse(response);
 
     return response.json();
-  });
+  }).catch;
 }
 
 function getArticle(articleId) {
