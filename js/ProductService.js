@@ -20,30 +20,37 @@ function checkValidId(productId) {
 async function getProductList(
   { page = 1, pageSize = 10, keyword } = { page: 1, pageSize: 10 },
 ) {
-  const url = new URL(BASE_URL);
-  url.searchParams.set("page", page);
-  url.searchParams.set("pageSize", pageSize);
-  keyword && url.searchParams.set("keyword", keyword);
+  try {
+    const url = new URL(BASE_URL);
+    url.searchParams.set("page", page);
+    url.searchParams.set("pageSize", pageSize);
+    keyword && url.searchParams.set("keyword", keyword);
 
-  const response = await fetch(url);
+    const response = await fetch(url);
 
-  checkValidResponse(response);
+    checkValidResponse(response);
 
-  return response.json();
+    return response.json();
+  } catch (error) {
+    console.error("getProductList 오류", error);
+    throw error;
+  }
 }
 
 async function getProduct(productId) {
-  checkValidId(productId);
+  try {
+    checkValidId(productId);
 
-  const response = await fetch(`${BASE_URL}/${productId}`);
+    const response = await fetch(`${BASE_URL}/${productId}`);
 
-  checkValidResponse(response);
+    checkValidResponse(response);
 
-  return response.json();
+    return response.json();
+  } catch (error) {
+    console.error("getProduct 오류", error);
+    throw error;
+  }
 }
-
-// const result = await getProduct(4075);
-// console.log(result);
 
 async function createProduct({
   name = "상품 이름",
@@ -52,27 +59,29 @@ async function createProduct({
   tags = ["전자제품"],
   images = ["https://example.com/..."],
 } = {}) {
-  const response = await fetch(BASE_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name,
-      description,
-      price,
-      tags,
-      images,
-    }),
-  });
+  try {
+    const response = await fetch(BASE_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        description,
+        price,
+        tags,
+        images,
+      }),
+    });
 
-  checkValidResponse(response);
+    checkValidResponse(response);
 
-  return response.json();
+    return response.json();
+  } catch (error) {
+    console.error("createProduct 오류", error);
+    throw error;
+  }
 }
-
-// const result2 = await createProduct({});
-// console.log(result2);
 
 async function patchProduct({
   productId,
@@ -82,45 +91,49 @@ async function patchProduct({
   tags = ["전자제품"],
   images = ["https://example.com/..."],
 } = {}) {
-  checkValidId(productId);
+  try {
+    checkValidId(productId);
 
-  const response = await fetch(`${BASE_URL}/${productId}`, {
-    method: "PATCH",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      name,
-      description,
-      price,
-      tags,
-      images,
-    }),
-  });
+    const response = await fetch(`${BASE_URL}/${productId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        description,
+        price,
+        tags,
+        images,
+      }),
+    });
 
-  checkValidResponse(response);
+    checkValidResponse(response);
 
-  return response.json();
+    return response.json();
+  } catch (error) {
+    console.error("patchProduct 오류", error);
+    throw error;
+  }
 }
-
-// const result3 = await patchProduct({ productId: 4104, name: "샴푸" });
-// console.log(result3);
 
 async function deleteProduct(productId) {
-  checkValidId(productId);
+  try {
+    checkValidId(productId);
 
-  const response = await fetch(`${BASE_URL}/${productId}`, {
-    method: "DELETE",
-  });
+    const response = await fetch(`${BASE_URL}/${productId}`, {
+      method: "DELETE",
+    });
 
-  checkValidResponse(response);
+    checkValidResponse(response);
 
-  if (response.status === 204) {
-    return;
+    if (response.status === 204) {
+      return;
+    }
+
+    return response.json();
+  } catch (error) {
+    console.error("deleteProduct 오류", error);
+    throw error;
   }
-
-  return response.json();
 }
-
-// const result4 = await deleteProduct(4104);
-// console.log(result4);
