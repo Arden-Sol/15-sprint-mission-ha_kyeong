@@ -8,8 +8,8 @@ export function checkValidResponse(response) {
   }
 }
 
-export function checkValidId(articleId) {
-  if (!articleId) {
-    throw new Error(`게시글 ID 번호를 입력해주세요`);
+export function checkValidId(id) {
+  if (!id) {
+    throw new Error(`ID 번호를 입력해주세요`);
   }
 }
