@@ -13,21 +13,32 @@ function getArticleList(
   url.searchParams.set("pageSize", pageSize);
   keyword && url.searchParams.set("keyword", keyword);
 
-  return fetch(url).then((response) => {
-    checkValidResponse(response);
+  return fetch(url)
+    .then((response) => {
+      checkValidResponse(response);
 
-    return response.json();
-  }).catch;
+      return response.json();
+    })
+    .catch((error) => {
+      console.error("getArticleList 오류", error);
+      throw error;
+    });
 }
 
 function getArticle(articleId) {
+  // 입력값 검증 오류는 네트워크 오류와 구분하기 위해 fetch Promise 체인과 분리하여 처리합니다.
   checkValidId(articleId);
 
-  return fetch(`${BASE_URL}/${articleId}`).then((response) => {
-    checkValidResponse(response);
+  return fetch(`${BASE_URL}/${articleId}`)
+    .then((response) => {
+      checkValidResponse(response);
 
-    return response.json();
-  });
+      return response.json();
+    })
+    .catch((error) => {
+      console.error("getArticle 오류", error);
+      throw error;
+    });
 }
 
 function createArticle({
@@ -45,11 +56,16 @@ function createArticle({
     headers: {
       "Content-Type": "application/json",
     },
-  }).then((response) => {
-    checkValidResponse(response);
+  })
+    .then((response) => {
+      checkValidResponse(response);
 
-    return response.json();
-  });
+      return response.json();
+    })
+    .catch((error) => {
+      console.error("createArticle 오류", error);
+      throw error;
+    });
 }
 
 function patchArticle({
@@ -70,11 +86,16 @@ function patchArticle({
     headers: {
       "Content-Type": "application/json",
     },
-  }).then((response) => {
-    checkValidResponse(response);
+  })
+    .then((response) => {
+      checkValidResponse(response);
 
-    return response.json();
-  });
+      return response.json();
+    })
+    .catch((error) => {
+      console.error("patchArticle 오류", error);
+      throw error;
+    });
 }
 
 function deleteArticle(articleId) {
@@ -82,15 +103,20 @@ function deleteArticle(articleId) {
 
   return fetch(`${BASE_URL}/${articleId}`, {
     method: "DELETE",
-  }).then((response) => {
-    checkValidResponse(response);
+  })
+    .then((response) => {
+      checkValidResponse(response);
 
-    if (response.status === 204) {
-      return;
-    }
+      if (response.status === 204) {
+        return;
+      }
 
-    return response.json();
-  });
+      return response.json();
+    })
+    .catch((error) => {
+      console.error("deleteArticle 오류", error);
+      throw error;
+    });
 }
 
 export {
