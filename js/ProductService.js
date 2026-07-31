@@ -1,21 +1,8 @@
 "use strict";
 
+import { checkValidResponse, checkValidId } from "./checkValid.js";
+
 const BASE_URL = "https://panda-market-api-crud.vercel.app/products";
-
-// 아래 두 함수는 ArticleService.js에서도 공통적으로 있는 함수 -> import해오는 것이 좋을지
-function checkValidResponse(response) {
-  if (!response.ok) {
-    throw new Error(
-      `HTTP 통신 오류: ${response.status} ${response.statusText}`,
-    );
-  }
-}
-
-function checkValidId(productId) {
-  if (!productId) {
-    throw new Error(`상품 ID 번호를 입력해주세요`);
-  }
-}
 
 async function getProductList(
   { page = 1, pageSize = 10, keyword } = { page: 1, pageSize: 10 },
@@ -137,3 +124,11 @@ async function deleteProduct(productId) {
     throw error;
   }
 }
+
+export {
+  getProductList,
+  getProduct,
+  createProduct,
+  patchProduct,
+  deleteProduct,
+};

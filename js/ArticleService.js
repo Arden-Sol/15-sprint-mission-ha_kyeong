@@ -1,20 +1,8 @@
 "use strict";
 
+import { checkValidResponse, checkValidId } from "./checkValid.js";
+
 const BASE_URL = "https://panda-market-api-crud.vercel.app/articles";
-
-function checkValidResponse(response) {
-  if (!response.ok) {
-    throw new Error(
-      `HTTP 통신 오류: ${response.status} ${response.statusText}`,
-    );
-  }
-}
-
-function checkValidId(articleId) {
-  if (!articleId) {
-    throw new Error(`게시글 ID 번호를 입력해주세요`);
-  }
-}
 
 // 파라미터의 기본값을 어떻게 주는 것이 상황에 적절할까
 function getArticleList(
@@ -104,3 +92,11 @@ function deleteArticle(articleId) {
     return response.json();
   });
 }
+
+export {
+  getArticleList,
+  getArticle,
+  createArticle,
+  patchArticle,
+  deleteArticle,
+};
