@@ -12,18 +12,16 @@ const instance = axios.create({
   baseURL: "https://panda-market-api-crud.vercel.app",
 });
 
-export function checkValidId(id) {
+function checkValidId(id) {
   if (!id) {
     throw new Error(`ID 번호를 입력해주세요`);
   }
 }
 
-async function getProductList({ page = 1, pageSize = 10, keyword = "" } = {}) {
+async function getProductList({ page = 1, pageSize = 5, keyword = "" } = {}) {
   try {
     const response = await instance.get("/products", {
-      page,
-      pageSize,
-      keyword,
+      params: { page, pageSize, keyword },
     });
 
     return response.data;
