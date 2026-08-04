@@ -1,25 +1,40 @@
 "use strict";
 
-import { checkValidResponse, checkValidId } from "./checkValid.js";
+export {
+  getProductList,
+  getProduct,
+  createProduct,
+  patchProduct,
+  deleteProduct,
+};
 
-const BASE_URL = "https://panda-market-api-crud.vercel.app/products";
+const instance = axios.create({
+  baseURL: "https://panda-market-api-crud.vercel.app",
+});
 
-async function getProductList(
-  { page = 1, pageSize = 10, keyword } = { page: 1, pageSize: 10 },
-) {
+export function checkValidId(id) {
+  if (!id) {
+    throw new Error(`ID 번호를 입력해주세요`);
+  }
+}
+
+async function getProductList({ page = 1, pageSize = 10, keyword = "" } = {}) {
   try {
-    const url = new URL(BASE_URL);
-    url.searchParams.set("page", page);
-    url.searchParams.set("pageSize", pageSize);
-    keyword && url.searchParams.set("keyword", keyword);
+    const response = await instance.get("/products", {
+      page,
+      pageSize,
+      keyword,
+    });
 
-    const response = await fetch(url);
-
-    checkValidResponse(response);
-
-    return response.json();
+    return response.data;
   } catch (error) {
     console.error("getProductList 오류", error);
+
+    if (error.response) {
+      console.error("Status: ", error.response.status);
+      console.error("Data: ", error.response.data);
+    }
+
     throw error;
   }
 }
@@ -28,13 +43,17 @@ async function getProduct(productId) {
   try {
     checkValidId(productId);
 
-    const response = await fetch(`${BASE_URL}/${productId}`);
+    const response = await instance.get(`/products/${productId}`);
 
-    checkValidResponse(response);
-
-    return response.json();
+    return response.data;
   } catch (error) {
     console.error("getProduct 오류", error);
+
+    if (error.response) {
+      console.error("Status: ", error.response.status);
+      console.error("Data: ", error.response.data);
+    }
+
     throw error;
   }
 }
@@ -43,63 +62,61 @@ async function createProduct({
   name = "상품 이름",
   description = "상품 설명",
   price = 1000,
-  tags = ["전자제품"],
   images = ["https://example.com/..."],
+  tags = ["전자제품"],
 } = {}) {
   try {
-    const response = await fetch(BASE_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        description,
-        price,
-        tags,
-        images,
-      }),
+    const response = await instance.post(`/products/`, {
+      name,
+      description,
+      price,
+      images,
+      tags,
     });
 
-    checkValidResponse(response);
-
-    return response.json();
+    return response.data;
   } catch (error) {
     console.error("createProduct 오류", error);
+
+    if (error.response) {
+      console.error("Status: ", error.response.status);
+      console.error("Data: ", error.response.data);
+    }
+
     throw error;
   }
 }
 
-async function patchProduct({
+async function patchProduct(
   productId,
-  name = "상품 이름",
-  description = "상품 설명",
-  price = 1000,
-  tags = ["전자제품"],
-  images = ["https://example.com/..."],
-} = {}) {
+  {
+    name = "상품 이름",
+    description = "상품 설명",
+    price = 1000,
+    images = ["https://example.com/..."],
+    tags = ["전자제품"],
+  } = {},
+) {
   try {
     checkValidId(productId);
 
-    const response = await fetch(`${BASE_URL}/${productId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        description,
-        price,
-        tags,
-        images,
-      }),
+    const response = await instance.patch(`/products/${productId}`, {
+      name,
+      description,
+      price,
+      images,
+      tags,
     });
 
-    checkValidResponse(response);
-
-    return response.json();
+    return response.data;
   } catch (error) {
     console.error("patchProduct 오류", error);
+
+    if (error.response) {
+      console.error("Status: ", error.response.status);
+      console.error("Data: ", error.response.data);
+    }
+
     throw error;
   }
 }
@@ -108,27 +125,17 @@ async function deleteProduct(productId) {
   try {
     checkValidId(productId);
 
-    const response = await fetch(`${BASE_URL}/${productId}`, {
-      method: "DELETE",
-    });
+    const response = await instance.delete(`/products/${productId}`);
 
-    checkValidResponse(response);
-
-    if (response.status === 204) {
-      return;
-    }
-
-    return response.json();
+    return response.data;
   } catch (error) {
     console.error("deleteProduct 오류", error);
+
+    if (error.response) {
+      console.error("Status: ", error.response.status);
+      console.error("Data: ", error.response.data);
+    }
+
     throw error;
   }
 }
-
-export {
-  getProductList,
-  getProduct,
-  createProduct,
-  patchProduct,
-  deleteProduct,
-};
