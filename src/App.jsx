@@ -1,6 +1,6 @@
 import logoImage from './images/logo.png';
 import { ProductsCardList } from './components/ProductsCardList';
-import { getProducts, createProduct } from './components/api/productApi';
+import { getProducts } from './components/api/productApi';
 import { useEffect, useState } from 'react';
 
 const INITIAL_PAGE = 1;
@@ -57,8 +57,8 @@ function App() {
 
   const searchProduct = products.filter(
     (prev) =>
-      prev.name.includes(searchKeyword) ||
-      prev.description.includes(searchKeyword),
+      prev.name.includes(searchKeyword.trim()) ||
+      prev.description.includes(searchKeyword.trim()),
   );
 
   if (isLoading) {
