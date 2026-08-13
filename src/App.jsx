@@ -1,6 +1,6 @@
 import logoImage from './images/logo.png';
 import { ProductsCardList } from './components/ProductsCardList';
-import { getProducts } from './components/api/productApi';
+import { getProducts, createProduct } from './components/api/productApi';
 import { useEffect, useState } from 'react';
 
 const INITIAL_PAGE = 1;
@@ -14,6 +14,8 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const [searchKeyword, setSearchKeyword] = useState('');
 
   useEffect(() => {
     const getProductsList = async () => {
@@ -47,12 +49,17 @@ function App() {
     setProducts((prev) =>
       prev.toSorted((a, b) => new Date(b[order]) - new Date(a[order])),
     );
-    console.log('최신순이 동작했습니다.');
   };
 
   const handleSortByFavorite = (order) => {
     setProducts((prev) => prev.toSorted((a, b) => b[order] - a[order]));
   };
+
+  const searchProduct = products.filter(
+    (prev) =>
+      prev.name.includes(searchKeyword) ||
+      prev.description.includes(searchKeyword),
+  );
 
   if (isLoading) {
     return <div>로딩중...</div>;
@@ -61,6 +68,8 @@ function App() {
   if (error) {
     return <div>에러가 났습니다.</div>;
   }
+
+  const productsToShow = searchKeyword.trim() === '' ? products : searchProduct;
 
   return (
     <>
@@ -87,14 +96,18 @@ function App() {
         <section id="productsContainer">
           <div id="productsTitle">
             <h1>판매 중인 상품</h1>
-            <input type="text" />
+            <input
+              type="text"
+              value={searchKeyword}
+              onChange={(e) => setSearchKeyword(e.target.value)}
+            />
             <button>상품 등록하기</button>
             <select onChange={(e) => sortedProducts(e.target.value)}>
               <option value="createdAt">최신순</option>
               <option value="favoriteCount">좋아요순</option>
             </select>
           </div>
-          <ProductsCardList products={products} />
+          <ProductsCardList products={productsToShow} />
           <button id="paginationButton">페이지 버튼</button>
         </section>
       </main>
