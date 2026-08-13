@@ -75,6 +75,9 @@ function App() {
   }
 
   const productsToShow = searchKeyword.trim() === '' ? products : searchProduct;
+  const bestProducts = products
+    .toSorted((a, b) => b['favoriteCount'] - a['favoriteCount'])
+    .slice(0, 4);
 
   return (
     <>
@@ -94,7 +97,7 @@ function App() {
         <section id="bestProductsContainer">
           <h1>베스트 상품</h1>
           <div id="bestProducts">
-            {/* <ProductsCardList /> */}
+            <ProductsCardList products={bestProducts} />
             <div></div>
           </div>
         </section>
