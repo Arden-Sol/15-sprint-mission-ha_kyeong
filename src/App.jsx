@@ -1,7 +1,48 @@
 import logoImage from './images/logo.png';
 import { ProductsCardList } from './components/ProductsCardList';
+import { getProducts } from './components/api/productApi';
+import { useEffect, useState } from 'react';
+
+const INITIAL_PAGE = 1;
+const PRODUCTS_PER_PAGE = 10;
 
 function App() {
+  const [products, setProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(INITIAL_PAGE);
+  const [totalProducts, setTotalProducts] = useState(0);
+  const totalPages = Math.ceil(totalProducts / PRODUCTS_PER_PAGE);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const getProductsList = async () => {
+      setError(null);
+      setIsLoading(true);
+      try {
+        const { list, totalCount } = await getProducts({
+          page: INITIAL_PAGE,
+          pageSize: PRODUCTS_PER_PAGE,
+        });
+        setProducts(list);
+        setTotalProducts(totalCount);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getProductsList();
+  }, [currentPage]);
+
+  if (isLoading) {
+    return <div>로딩중...</div>;
+  }
+
+  if (error) {
+    return <div>에러가 났습니다.</div>;
+  }
+
   return (
     <>
       <header>
@@ -20,7 +61,8 @@ function App() {
         <section id="bestProductsContainer">
           <h1>베스트 상품</h1>
           <div id="bestProducts">
-            <ProductsCardList />
+            {/* <ProductsCardList /> */}
+            <div></div>
           </div>
         </section>
         <section id="productsContainer">
@@ -33,7 +75,7 @@ function App() {
               <option value="최신">최신순</option>
             </select>
           </div>
-          <ProductsCardList />
+          <ProductsCardList products={products} />
           <button id="paginationButton">페이지 버튼</button>
         </section>
       </main>

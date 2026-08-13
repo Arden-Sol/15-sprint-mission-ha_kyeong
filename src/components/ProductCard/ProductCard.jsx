@@ -1,14 +1,15 @@
-function ProductCard() {
+function ProductCard({ products }) {
+  console.log(products);
   return (
-    <li>
-      <img src="#" alt="" />
-      <p>아이패드 미니 팝니다</p>
-      <p>500,000원</p>
+    <>
+      <img src={products.images} alt="제품 사진" />
+      <p>{products.description}</p>
+      <p>{products.price}원</p>
       <div>
         <img src="#" alt="아이콘" />
-        <p>240</p>
+        <p>{products.favoriteCount}</p>
       </div>
-    </li>
+    </>
   );
 }
 export default ProductCard;

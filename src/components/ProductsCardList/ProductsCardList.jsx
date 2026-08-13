@@ -1,9 +1,13 @@
 import { ProductCard } from '../ProductCard';
 
-function ProductsCardList() {
+function ProductsCardList({ products }) {
   return (
     <ul>
-      <ProductCard />
+      {products.map((product) => (
+        <li key={product.id}>
+          <ProductCard products={product} />
+        </li>
+      ))}
     </ul>
   );
 }

@@ -11,7 +11,7 @@ async function getProducts({ page = 1, pageSize = 10 }) {
     params: { page, pageSize },
   });
 
-  return res.data;
+  return await res.data;
 }
 
 async function createProduct(productData) {
