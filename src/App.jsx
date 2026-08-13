@@ -15,8 +15,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // const [order, setOrder] = useState('createdAt');
-
   useEffect(() => {
     const getProductsList = async () => {
       setError(null);
@@ -37,18 +35,24 @@ function App() {
     getProductsList();
   }, [currentPage]);
 
-  const sortedProducts = (order) =>
+  const sortedProducts = (order) => {
+    if (order === 'createdAt') {
+      handleSortBynewest(order);
+    } else if (order === 'favoriteCount') {
+      handleSortByFavorite(order);
+    }
+  };
+
+  const handleSortBynewest = (order) => {
+    setProducts((prev) =>
+      prev.toSorted((a, b) => new Date(b[order]) - new Date(a[order])),
+    );
+    console.log('최신순이 동작했습니다.');
+  };
+
+  const handleSortByFavorite = (order) => {
     setProducts((prev) => prev.toSorted((a, b) => b[order] - a[order]));
-
-  // const handleSortBynewest = () => {
-  //   setOrder('createdAt');
-  //   sortProducts();
-  // };
-
-  // const handleSortByFavorite = () => {
-  //   setOrder('favoriteCount');
-  //   sortProducts();
-  // };
+  };
 
   if (isLoading) {
     return <div>로딩중...</div>;
