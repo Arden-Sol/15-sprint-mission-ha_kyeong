@@ -15,6 +15,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  // const [order, setOrder] = useState('createdAt');
+
   useEffect(() => {
     const getProductsList = async () => {
       setError(null);
@@ -34,6 +36,19 @@ function App() {
     };
     getProductsList();
   }, [currentPage]);
+
+  const sortedProducts = (order) =>
+    setProducts((prev) => prev.toSorted((a, b) => b[order] - a[order]));
+
+  // const handleSortBynewest = () => {
+  //   setOrder('createdAt');
+  //   sortProducts();
+  // };
+
+  // const handleSortByFavorite = () => {
+  //   setOrder('favoriteCount');
+  //   sortProducts();
+  // };
 
   if (isLoading) {
     return <div>로딩중...</div>;
@@ -70,9 +85,9 @@ function App() {
             <h1>판매 중인 상품</h1>
             <input type="text" />
             <button>상품 등록하기</button>
-            <select>
-              <option value="좋아요">좋아요순</option>
-              <option value="최신">최신순</option>
+            <select onChange={(e) => sortedProducts(e.target.value)}>
+              <option value="createdAt">최신순</option>
+              <option value="favoriteCount">좋아요순</option>
             </select>
           </div>
           <ProductsCardList products={products} />
