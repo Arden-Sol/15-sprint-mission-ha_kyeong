@@ -1,6 +1,7 @@
 import logoImage from './images/logo.png';
 import { ProductsCardList } from './components/ProductsCardList';
 import { getProducts } from './components/api/productApi';
+import { PaginationButton } from './components/PaginationButton';
 import { useEffect, useState } from 'react';
 
 const INITIAL_PAGE = 1;
@@ -23,7 +24,7 @@ function App() {
       setIsLoading(true);
       try {
         const { list, totalCount } = await getProducts({
-          page: INITIAL_PAGE,
+          page: currentPage,
           pageSize: PRODUCTS_PER_PAGE,
         });
         setProducts(list);
@@ -60,6 +61,10 @@ function App() {
       prev.name.includes(searchKeyword.trim()) ||
       prev.description.includes(searchKeyword.trim()),
   );
+
+  const goToPage = (selectPage) => {
+    setCurrentPage(selectPage);
+  };
 
   if (isLoading) {
     return <div>로딩중...</div>;
@@ -108,7 +113,11 @@ function App() {
             </select>
           </div>
           <ProductsCardList products={productsToShow} />
-          <button id="paginationButton">페이지 버튼</button>
+          <PaginationButton
+            totalPages={totalPages}
+            currentPage={currentPage}
+            goToPage={goToPage}
+          />
         </section>
       </main>
 
