@@ -36,3 +36,15 @@
     margin-left: 0.5rem;
   }
 }
+
+/* 태블릿 사이즈 */
+@media (max-width: 768px) {
+  .footer {
+    padding: 2.5rem 2rem;
+    height: 9rem;
+
+    & > .footerLinks {
+      padding-left: 2.6rem;
+    }
+  }
+}

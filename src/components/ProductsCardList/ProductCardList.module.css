@@ -5,6 +5,21 @@
   gap: 1rem;
 }
 .best {
-  grid-template-columns: repeat(4, 17.6rem);
+  grid-template-columns: repeat(4, 1fr);
   justify-content: space-between;
+}
+
+/* 반응형 타블렛 사이즈 */
+@media (max-width: 768px) {
+  .cardList {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, auto);
+    justify-content: space-between;
+  }
+  .best {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-between;
+  }
 }

@@ -19,3 +19,10 @@
   background-color: #2f80ed;
   color: var(--secondary-color-100);
 }
+
+/* 태블릿 사이즈 */
+@media (max-width: 768px) {
+  .PaginationButton {
+    width: 100%;
+  }
+}

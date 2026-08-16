@@ -32,3 +32,16 @@
   color: var(--secondary-color-100);
   font-weight: var(--font-weight-normal);
 }
+
+/* 태블릿 사이즈 */
+@media (max-width: 768px) {
+  .header {
+    margin-right: 1.5rem;
+    margin-left: 1.5rem;
+    padding-top: 0.25rem;
+
+    &::after {
+      top: 4rem;
+    }
+  }
+}
