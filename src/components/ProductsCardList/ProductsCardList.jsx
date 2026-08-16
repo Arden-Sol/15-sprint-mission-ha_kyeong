@@ -1,12 +1,15 @@
+import styles from './ProductCardList.module.css';
 import { ProductCard } from '../ProductCard';
 
-function ProductsCardList({ products }) {
+function ProductsCardList({ products, variant }) {
   return (
-    <ul>
+    <ul className={`${styles.cardList} ${variant ? styles[variant] : ''}`}>
       {products.map((product) => (
-        <li key={product.id}>
-          <ProductCard products={product} />
-        </li>
+        <ProductCard
+          key={product.id}
+          products={product}
+          variant={variant}
+        ></ProductCard>
       ))}
     </ul>
   );

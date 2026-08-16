@@ -1,0 +1,21 @@
+.PaginationButton {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 2.2rem;
+
+  & > * {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 100%;
+    border: 1px solid var(--secondary-color-200);
+    background-color: #fff;
+    color: var(--secondary-color-500);
+    padding: 0.78125rem;
+  }
+}
+
+.active {
+  background-color: #2f80ed;
+  color: var(--secondary-color-100);
+}

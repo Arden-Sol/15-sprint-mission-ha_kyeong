@@ -1,3 +1,6 @@
+import styles from './PaginationButton.module.css';
+import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+
 function PaginationButton({ totalPages, currentPage, goToPage }) {
   const groupNum = Math.floor((currentPage - 1) / 5);
   const startNum = groupNum * 5 + 1;
@@ -16,13 +19,23 @@ function PaginationButton({ totalPages, currentPage, goToPage }) {
   };
 
   return (
-    <>
-      <button onClick={handlePrevious}>이전</button>
+    <div className={styles.PaginationButton}>
+      <button onClick={handlePrevious} className={styles.previous}>
+        <FaChevronLeft />
+      </button>
       {makeButtonsArray().map((i) => (
-        <button onClick={() => goToPage(i)}>{i}</button>
+        <button
+          key={i}
+          onClick={() => goToPage(i)}
+          className={`${styles.number} ${i === currentPage ? styles.active : ''}`}
+        >
+          {i}
+        </button>
       ))}
-      <button onClick={handleNext}>이후</button>
-    </>
+      <button onClick={handleNext} className={styles.nest}>
+        <FaChevronRight />
+      </button>
+    </div>
   );
 }
 export default PaginationButton;

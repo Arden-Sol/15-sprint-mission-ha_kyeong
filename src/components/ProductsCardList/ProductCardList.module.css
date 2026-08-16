@@ -1,0 +1,10 @@
+.cardList {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, auto);
+  gap: 1rem;
+}
+.best {
+  grid-template-columns: repeat(4, 17.6rem);
+  justify-content: space-between;
+}

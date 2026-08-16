@@ -1,0 +1,11 @@
+.nav {
+  color: var(--secondary-color-600);
+  font-weight: var(--font-weight-big);
+  line-height: 1.625rem;
+  padding-left: 2.5rem;
+
+  & a {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+  }
+}

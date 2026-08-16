@@ -1,8 +1,12 @@
-import logoImage from './images/logo.png';
 import { ProductsCardList } from './components/ProductsCardList';
 import { getProducts } from './components/api/productApi';
 import { PaginationButton } from './components/PaginationButton';
 import { useEffect, useState } from 'react';
+import { Header } from './components/Header/';
+import { Footer } from './components/Footer/';
+import styles from './main.module.css';
+import { CiSearch } from 'react-icons/ci';
+import { FaCaretDown } from 'react-icons/fa';
 
 const INITIAL_PAGE = 1;
 const PRODUCTS_PER_PAGE = 10;
@@ -81,39 +85,40 @@ function App() {
 
   return (
     <>
-      <header>
-        <a href="/">
-          <img src={logoImage} alt="판다 마켓 로고 이미지" />
-        </a>
+      <Header />
 
-        <nav>
-          <a href="#">자유 게시판</a>
-          <a href="#">중고마켓</a>
-        </nav>
-        <a href="#">로그인</a>
-      </header>
-
-      <main>
+      <main className={styles.main}>
         <section id="bestProductsContainer">
-          <h1>베스트 상품</h1>
+          <h1 className={styles.bestProductTitle}>베스트 상품</h1>
           <div id="bestProducts">
-            <ProductsCardList products={bestProducts} />
+            <ProductsCardList products={bestProducts} variant="best" />
             <div></div>
           </div>
         </section>
-        <section id="productsContainer">
-          <div id="productsTitle">
+        <section id="productsContainer" className={styles.productsContainer}>
+          <div id="productsTitle" className={styles.productsTitle}>
             <h1>판매 중인 상품</h1>
-            <input
-              type="text"
-              value={searchKeyword}
-              onChange={(e) => setSearchKeyword(e.target.value)}
-            />
+            <div className={styles.input}>
+              <CiSearch />
+              <input
+                type="text"
+                placeholder="검색할 상품을 입력해주세요"
+                value={searchKeyword}
+                onChange={(e) => setSearchKeyword(e.target.value)}
+              />
+            </div>
             <button>상품 등록하기</button>
-            <select onChange={(e) => sortedProducts(e.target.value)}>
-              <option value="createdAt">최신순</option>
-              <option value="favoriteCount">좋아요순</option>
-            </select>
+            <div className={styles.select}>
+              <FaCaretDown />
+              <select onChange={(e) => sortedProducts(e.target.value)}>
+                <option value="createdAt" className={styles.option}>
+                  최신순
+                </option>
+                <option value="favoriteCount" className={styles.option}>
+                  좋아요순
+                </option>
+              </select>
+            </div>
           </div>
           <ProductsCardList products={productsToShow} />
           <PaginationButton
@@ -124,16 +129,7 @@ function App() {
         </section>
       </main>
 
-      <footer>
-        <div>codeit - 2024</div>
-        <div>Privacy Policy FAQ</div>
-        <div>
-          <a href="#">페이스북</a>
-          <a href="#">트위터</a>
-          <a href="#">유튜브</a>
-          <a href="#">인스타그램</a>
-        </div>
-      </footer>
+      <Footer />
     </>
   );
 }
