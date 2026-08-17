@@ -1,0 +1,60 @@
+import { useEffect, useState } from 'react';
+import { ProductContext } from './ProductContext.jsx';
+import { getProducts } from '../api/productApi.js';
+import usePagination from '../hooks/usePagination.js';
+
+function ProductProvider({ children }) {
+  const {
+    currentPage,
+    setTotalProducts,
+    totalPages,
+    goToPage,
+    PRODUCTS_PER_PAGE,
+  } = usePagination();
+
+  const [products, setProducts] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const getProductsList = async () => {
+      setError(null);
+      setIsLoading(true);
+      try {
+        const { list, totalCount } = await getProducts({
+          page: currentPage,
+          pageSize: PRODUCTS_PER_PAGE,
+        });
+        setProducts(list);
+        setTotalProducts(totalCount);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    getProductsList();
+  }, [currentPage, PRODUCTS_PER_PAGE, setTotalProducts]);
+
+  if (isLoading) {
+    return <div>로딩중...</div>;
+  }
+
+  if (error) {
+    return <div>상품을 찾을 수 없습니다.</div>;
+  }
+
+  const value = {
+    products,
+    totalPages,
+    goToPage,
+    setProducts,
+    currentPage,
+  };
+
+  return (
+    <ProductContext.Provider value={value}>{children}</ProductContext.Provider>
+  );
+}
+export default ProductProvider;

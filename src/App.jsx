@@ -1,50 +1,19 @@
 import { ProductsCardList } from './components/ProductsCardList';
-import { getProducts } from './components/api/productApi';
 import { PaginationButton } from './components/PaginationButton';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Header } from './components/Header/';
 import { Footer } from './components/Footer/';
 import styles from './main.module.css';
 import { CiSearch } from 'react-icons/ci';
 import { FaCaretDown } from 'react-icons/fa';
 import { FaSortAmountDown } from 'react-icons/fa';
-import usePagination from './components/hooks/usePagination.js';
+import { useProductContext } from './components/contexts/ProductContext';
 
 function App() {
-  const [products, setProducts] = useState([]);
+  const { products, totalPages, goToPage, setProducts, currentPage } =
+    useProductContext();
 
   const [searchKeyword, setSearchKeyword] = useState('');
-
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-
-  const {
-    currentPage,
-    setTotalProducts,
-    totalPages,
-    goToPage,
-    PRODUCTS_PER_PAGE,
-  } = usePagination();
-
-  useEffect(() => {
-    const getProductsList = async () => {
-      setError(null);
-      setIsLoading(true);
-      try {
-        const { list, totalCount } = await getProducts({
-          page: currentPage,
-          pageSize: PRODUCTS_PER_PAGE,
-        });
-        setProducts(list);
-        setTotalProducts(totalCount);
-      } catch (error) {
-        setError(error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getProductsList();
-  }, [currentPage, PRODUCTS_PER_PAGE, setTotalProducts]);
 
   const sortedProducts = (order) => {
     if (order === 'createdAt') {
@@ -74,14 +43,6 @@ function App() {
   const handleSortByFavorite = (order) => {
     setProducts((prev) => prev.toSorted((a, b) => b[order] - a[order]));
   };
-
-  if (isLoading) {
-    return <div>로딩중...</div>;
-  }
-
-  if (error) {
-    return <div>에러가 났습니다.</div>;
-  }
 
   return (
     <>
