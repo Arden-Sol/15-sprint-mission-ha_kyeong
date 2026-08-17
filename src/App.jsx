@@ -8,20 +8,23 @@ import styles from './main.module.css';
 import { CiSearch } from 'react-icons/ci';
 import { FaCaretDown } from 'react-icons/fa';
 import { FaSortAmountDown } from 'react-icons/fa';
-
-const INITIAL_PAGE = 1;
-const PRODUCTS_PER_PAGE = 4;
+import usePagination from './components/hooks/usePagination.js';
 
 function App() {
   const [products, setProducts] = useState([]);
-  const [currentPage, setCurrentPage] = useState(INITIAL_PAGE);
-  const [totalProducts, setTotalProducts] = useState(0);
-  const totalPages = Math.ceil(totalProducts / PRODUCTS_PER_PAGE);
+
+  const [searchKeyword, setSearchKeyword] = useState('');
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const [searchKeyword, setSearchKeyword] = useState('');
+  const {
+    currentPage,
+    setTotalProducts,
+    totalPages,
+    goToPage,
+    PRODUCTS_PER_PAGE,
+  } = usePagination();
 
   useEffect(() => {
     const getProductsList = async () => {
@@ -41,7 +44,7 @@ function App() {
       }
     };
     getProductsList();
-  }, [currentPage]);
+  }, [currentPage, PRODUCTS_PER_PAGE, setTotalProducts]);
 
   const sortedProducts = (order) => {
     if (order === 'createdAt') {
@@ -50,6 +53,17 @@ function App() {
       handleSortByFavorite(order);
     }
   };
+
+  const searchProduct = products.filter(
+    (prev) =>
+      prev.name.includes(searchKeyword.trim()) ||
+      prev.description.includes(searchKeyword.trim()),
+  );
+
+  const productsToShow = searchKeyword.trim() === '' ? products : searchProduct;
+  const bestProducts = products
+    .toSorted((a, b) => b['favoriteCount'] - a['favoriteCount'])
+    .slice(0, 4);
 
   const handleSortBynewest = (order) => {
     setProducts((prev) =>
@@ -61,16 +75,6 @@ function App() {
     setProducts((prev) => prev.toSorted((a, b) => b[order] - a[order]));
   };
 
-  const searchProduct = products.filter(
-    (prev) =>
-      prev.name.includes(searchKeyword.trim()) ||
-      prev.description.includes(searchKeyword.trim()),
-  );
-
-  const goToPage = (selectPage) => {
-    setCurrentPage(selectPage);
-  };
-
   if (isLoading) {
     return <div>로딩중...</div>;
   }
@@ -78,11 +82,6 @@ function App() {
   if (error) {
     return <div>에러가 났습니다.</div>;
   }
-
-  const productsToShow = searchKeyword.trim() === '' ? products : searchProduct;
-  const bestProducts = products
-    .toSorted((a, b) => b['favoriteCount'] - a['favoriteCount'])
-    .slice(0, 4);
 
   return (
     <>
