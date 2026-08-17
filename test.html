@@ -8,6 +8,42 @@
     <script src="./js/main.js" type="module" defer></script>
   </head>
   <body>
-    <button id="button">테스트 버튼</button>
+    <button id="reset">초기화</button>
+    <!-- <button id="article">article</button> -->
+    <div class="productContainer">
+      <h1>상품관련 API</h1>
+      <div>상품 생성/삭제는 아</div>
+      <p>
+        상품 리스트 가져오기:
+        <button id="productList">product list</button>
+      </p>
+
+      <label for="productId">Product Id</label>
+      <input type="text" id="productIdInput" />
+      <button type="submit" id="productGet">조회</button>
+      <button type="submit" id="productDelete">삭제</button>
+
+      <form action="#" id="productForm">
+        <label for="productName">Product name</label>
+        <input name="name" type="text" id="productName" />
+
+        <label for="productDescription">Product description</label>
+        <input name="description" type="text" id="productDescription" />
+
+        <label for="productPrice">Product price</label>
+        <input name="price" type="text" id="productPrice" />
+
+        <label for="productImage">Product image</label>
+        <input name="images" type="text" id="productImage" />
+
+        <label for="productTag">Product tag</label>
+        <input name="tags" type="text" id="productTag" />
+
+        <button type="submit" id="productCreate">생성</button>
+        <button type="submit" id="productPatch">수정</button>
+      </form>
+    </div>
+
+    <pre id="result"></pre>
   </body>
 </html>
