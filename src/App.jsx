@@ -23,34 +23,24 @@ function App() {
 
   const sortedProducts = (order) => {
     if (order === 'createdAt') {
-      handleSortBynewest(order);
+      setProducts((prev) =>
+        prev.toSorted((a, b) => new Date(b[order]) - new Date(a[order])),
+      );
     } else if (order === 'favoriteCount') {
-      handleSortByFavorite(order);
+      setProducts((prev) => prev.toSorted((a, b) => b[order] - a[order]));
     }
   };
 
+  const keyword = searchKeyword.trim();
   const searchProduct = products.filter(
-    (prev) =>
-      prev.name.includes(searchKeyword.trim()) ||
-      prev.description.includes(searchKeyword.trim()),
+    (prev) => prev.name.includes(keyword) || prev.description.includes(keyword),
   );
-
-  const productsToShow = searchKeyword.trim() === '' ? products : searchProduct;
+  const productsToShow = keyword === '' ? products : searchProduct;
 
   const bestProductsNumber = Number(productsPerPage) / 2 - 1;
   const bestProducts = products
     .toSorted((a, b) => b['favoriteCount'] - a['favoriteCount'])
     .slice(0, bestProductsNumber);
-
-  const handleSortBynewest = (order) => {
-    setProducts((prev) =>
-      prev.toSorted((a, b) => new Date(b[order]) - new Date(a[order])),
-    );
-  };
-
-  const handleSortByFavorite = (order) => {
-    setProducts((prev) => prev.toSorted((a, b) => b[order] - a[order]));
-  };
 
   return (
     <>
