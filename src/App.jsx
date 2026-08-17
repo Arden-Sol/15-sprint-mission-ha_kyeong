@@ -10,8 +10,14 @@ import { FaSortAmountDown } from 'react-icons/fa';
 import { useProductContext } from './components/contexts/ProductContext';
 
 function App() {
-  const { products, totalPages, goToPage, setProducts, currentPage } =
-    useProductContext();
+  const {
+    products,
+    totalPages,
+    goToPage,
+    setProducts,
+    currentPage,
+    productsPerPage,
+  } = useProductContext();
 
   const [searchKeyword, setSearchKeyword] = useState('');
 
@@ -30,9 +36,11 @@ function App() {
   );
 
   const productsToShow = searchKeyword.trim() === '' ? products : searchProduct;
+
+  const bestProductsNumber = Number(productsPerPage) / 2 - 1;
   const bestProducts = products
     .toSorted((a, b) => b['favoriteCount'] - a['favoriteCount'])
-    .slice(0, 4);
+    .slice(0, bestProductsNumber);
 
   const handleSortBynewest = (order) => {
     setProducts((prev) =>

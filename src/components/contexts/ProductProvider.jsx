@@ -9,7 +9,7 @@ function ProductProvider({ children }) {
     setTotalProducts,
     totalPages,
     goToPage,
-    PRODUCTS_PER_PAGE,
+    productsPerPage,
   } = usePagination();
 
   const [products, setProducts] = useState([]);
@@ -24,7 +24,7 @@ function ProductProvider({ children }) {
       try {
         const { list, totalCount } = await getProducts({
           page: currentPage,
-          pageSize: PRODUCTS_PER_PAGE,
+          pageSize: productsPerPage,
         });
         setProducts(list);
         setTotalProducts(totalCount);
@@ -35,7 +35,7 @@ function ProductProvider({ children }) {
       }
     };
     getProductsList();
-  }, [currentPage, PRODUCTS_PER_PAGE, setTotalProducts]);
+  }, [currentPage, productsPerPage, setTotalProducts]);
 
   if (isLoading) {
     return <div>로딩중...</div>;
@@ -51,6 +51,7 @@ function ProductProvider({ children }) {
     goToPage,
     setProducts,
     currentPage,
+    productsPerPage,
   };
 
   return (
