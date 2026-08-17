@@ -2,12 +2,12 @@
 
 import { instance, checkValidId } from "./checkValid.js";
 
-export {
-  getArticleList,
-  getArticle,
-  createArticle,
-  patchArticle,
-  deleteArticle,
+export const ArticleApi = {
+  getList: getArticleList,
+  get: getArticle,
+  create: createArticle,
+  patch: patchArticle,
+  remove: deleteArticle,
 };
 
 function getArticleList({ page = 1, pageSize = 5, keyword = "" } = {}) {

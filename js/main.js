@@ -1,20 +1,7 @@
 "use strict";
 
-import {
-  getProductList,
-  getProduct,
-  createProduct,
-  patchProduct,
-  deleteProduct,
-} from "./ProductService.js";
-
-import {
-  getArticleList,
-  getArticle,
-  createArticle,
-  patchArticle,
-  deleteArticle,
-} from "./ArticleService.js";
+import { ProductApi } from "./ProductService.js";
+import { ArticleApi } from "./ArticleService.js";
 // 에러 -> alert으로
 // const articleBtn = document.querySelector("#article");
 const productListBtn = document.querySelector("#productList");
@@ -38,13 +25,13 @@ reset.addEventListener("click", () => {
 
 // 상품 리스트 가져오기
 productListBtn.addEventListener("click", async () => {
-  const product = await getProductList();
+  const product = await ProductApi.getList();
   result.textContent = JSON.stringify(product, null, 2);
 });
 
 // ID에 해당하는 상품 가져오기
 productGet.addEventListener("click", async () => {
-  const product = await getProduct(productIdInput.value);
+  const product = await ProductApi.get(productIdInput.value);
   result.textContent = JSON.stringify(product, null, 2);
   productIdInput.value = ""; // 해당 칸이 비어지는 지 확인
 });
@@ -62,7 +49,7 @@ productCreate.addEventListener("click", async (event) => {
         : input.value;
   });
 
-  const res = await createProduct(product);
+  const res = await ProductApi.create(product);
   result.textContent = JSON.stringify(res, null, 2);
 
   productsList.forEach((input) => (input.value = ""));
@@ -83,7 +70,7 @@ productPatch.addEventListener("click", async (event) => {
 
   const productId = productIdInput.value;
 
-  const res = await patchProduct(productId, product);
+  const res = await ProductApi.patch(productId, product);
   result.textContent = JSON.stringify(res, null, 2);
 
   productIdInput.value = "";
@@ -92,7 +79,7 @@ productPatch.addEventListener("click", async (event) => {
 
 // 상품 삭제
 productDelete.addEventListener("click", async () => {
-  const product = await deleteProduct(productIdInput.value);
+  const product = await ProductApi.remove(productIdInput.value);
   result.textContent = JSON.stringify(product, null, 2);
   productIdInput.value = "";
 });
@@ -108,20 +95,20 @@ const articlePatch = document.querySelector("#articlePatch");
 const articles = document.querySelectorAll("#articleForm input");
 const articlesList = [...articles];
 
-// 상품 리스트 가져오기
+// 아티클 리스트 가져오기
 articleListBtn.addEventListener("click", async () => {
-  const article = await getArticleList();
+  const article = await ArticleApi.getList();
   result.textContent = JSON.stringify(article, null, 2);
 });
 
-// ID에 해당하는 상품 가져오기
+// ID에 해당하는 아티클 가져오기
 articleGet.addEventListener("click", async () => {
-  const article = await getArticle(articleIdInput.value);
+  const article = await ArticleApi.get(articleIdInput.value);
   result.textContent = JSON.stringify(article, null, 2);
   articleIdInput.value = ""; // 해당 칸이 비어지는 지 확인
 });
 
-// 상품 생성
+// 아티클 생성
 articleCreate.addEventListener("click", async (event) => {
   event.preventDefault();
 
@@ -129,13 +116,13 @@ articleCreate.addEventListener("click", async (event) => {
 
   articlesList.forEach((input) => article.append(input.name, input.value));
 
-  const res = await createArticle(article);
+  const res = await ArticleApi.create(article);
   result.textContent = JSON.stringify(res, null, 2);
 
   articlesList.forEach((input) => (input.value = ""));
 });
 
-// 상품 수정
+// 아티클 수정
 articlePatch.addEventListener("click", async (event) => {
   event.preventDefault();
 
@@ -145,16 +132,16 @@ articlePatch.addEventListener("click", async (event) => {
 
   const articleId = articleIdInput.value;
 
-  const res = await patchArticle(articleId, article);
+  const res = await ArticleApi.patch(articleId, article);
   result.textContent = JSON.stringify(res, null, 2);
 
   articleIdInput.value = "";
   articlesList.forEach((input) => (input.value = ""));
 });
 
-// 상품 삭제
+// 아티클 삭제
 articleDelete.addEventListener("click", async () => {
-  const article = await deleteArticle(articleIdInput.value);
+  const article = await ArticleApi.remove(articleIdInput.value);
   result.textContent = JSON.stringify(article, null, 2);
   articleIdInput.value = "";
 });

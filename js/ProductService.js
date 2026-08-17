@@ -2,12 +2,12 @@
 
 import { instance, checkValidId } from "./checkValid.js";
 
-export {
-  getProductList,
-  getProduct,
-  createProduct,
-  patchProduct,
-  deleteProduct,
+export const ProductApi = {
+  getList: getProductList,
+  get: getProduct,
+  create: createProduct,
+  patch: patchProduct,
+  remove: deleteProduct,
 };
 
 async function getProductList({ page = 1, pageSize = 5, keyword = "" } = {}) {
