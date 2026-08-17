@@ -38,7 +38,7 @@ function ProductProvider({ children }) {
   }, [currentPage, productsPerPage, setTotalProducts]);
 
   if (isLoading) {
-    return <div>로딩중...</div>;
+    return <div className="spinner"></div>;
   }
 
   if (error) {
