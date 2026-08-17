@@ -1,5 +1,7 @@
 "use strict";
 
+import { instance, checkValidId } from "./checkValid.js";
+
 export {
   getArticleList,
   getArticle,
@@ -7,16 +9,6 @@ export {
   patchArticle,
   deleteArticle,
 };
-
-const instance = axios.create({
-  baseURL: "https://panda-market-api-crud.vercel.app",
-});
-
-function checkValidId(id) {
-  if (!id) {
-    throw new Error(`ID 번호를 입력해주세요`);
-  }
-}
 
 function getArticleList({ page = 1, pageSize = 5, keyword = "" } = {}) {
   return instance
@@ -57,13 +49,9 @@ function getArticle(articleId) {
     });
 }
 
-function createArticle({
-  title = "제목입니다",
-  content = "내용입니다",
-  image = "https://example.com/...",
-} = {}) {
+function createArticle(articleData) {
   return instance
-    .post("/articles", { title, content, image })
+    .post("/articles", articleData)
     .then((response) => {
       return response.data;
     })
@@ -79,18 +67,11 @@ function createArticle({
     });
 }
 
-function patchArticle(
-  articleId,
-  {
-    title = "게시글 제목입니다.",
-    content = "게시글 내용입니다.",
-    image = "https://example.com/...",
-  } = {},
-) {
+function patchArticle(articleId, articleData) {
   checkValidId(articleId);
 
   return instance
-    .patch(`/articles/${articleId}`, { title, content, image })
+    .patch(`/articles/${articleId}`, articleData)
     .then((response) => {
       return response.data;
     })

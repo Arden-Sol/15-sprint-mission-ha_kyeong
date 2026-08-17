@@ -1,5 +1,7 @@
 "use strict";
 
+import { instance, checkValidId } from "./checkValid.js";
+
 export {
   getProductList,
   getProduct,
@@ -7,16 +9,6 @@ export {
   patchProduct,
   deleteProduct,
 };
-
-const instance = axios.create({
-  baseURL: "https://panda-market-api-crud.vercel.app",
-});
-
-function checkValidId(id) {
-  if (!id) {
-    throw new Error(`ID 번호를 입력해주세요`);
-  }
-}
 
 async function getProductList({ page = 1, pageSize = 5, keyword = "" } = {}) {
   try {
@@ -56,21 +48,9 @@ async function getProduct(productId) {
   }
 }
 
-async function createProduct({
-  name = "상품 이름",
-  description = "상품 설명",
-  price = 1000,
-  images = ["https://example.com/..."],
-  tags = ["전자제품"],
-} = {}) {
+async function createProduct(productData) {
   try {
-    const response = await instance.post(`/products/`, {
-      name,
-      description,
-      price,
-      images,
-      tags,
-    });
+    const response = await instance.post(`/products/`, productData);
 
     return response.data;
   } catch (error) {
@@ -85,26 +65,14 @@ async function createProduct({
   }
 }
 
-async function patchProduct(
-  productId,
-  {
-    name = "상품 이름",
-    description = "상품 설명",
-    price = 1000,
-    images = ["https://example.com/..."],
-    tags = ["전자제품"],
-  } = {},
-) {
+async function patchProduct(productId, productData) {
   try {
     checkValidId(productId);
 
-    const response = await instance.patch(`/products/${productId}`, {
-      name,
-      description,
-      price,
-      images,
-      tags,
-    });
+    const response = await instance.patch(
+      `/products/${productId}`,
+      productData,
+    );
 
     return response.data;
   } catch (error) {

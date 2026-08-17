@@ -1,12 +1,8 @@
 "use strict";
 
-export function checkValidResponse(response) {
-  if (!response.ok) {
-    throw new Error(
-      `HTTP 통신 오류: ${response.status} ${response.statusText}`,
-    );
-  }
-}
+export const instance = axios.create({
+  baseURL: "https://panda-market-api-crud.vercel.app",
+});
 
 export function checkValidId(id) {
   if (!id) {
