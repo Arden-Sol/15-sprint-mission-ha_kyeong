@@ -15,16 +15,36 @@ const productsList = document.querySelectorAll("#productForm input");
 
 const result = document.querySelector("#result");
 
+const handleError = (error) => {
+  if (error.name === "ValidationError") {
+    alert(error.message);
+  } else if (error.response?.status === 404) {
+    alert("해당 상품을 찾을 수 없습니다.");
+  } else if (error.response?.status === 400) {
+    alert("잘못된 요청입니다.");
+  } else {
+    alert("서버와 통신하는 중 문제가 생겼습니다.");
+  }
+};
+
 // 상품 리스트 가져오기
 productListBtn.addEventListener("click", async () => {
-  const product = await ProductApi.getList();
-  result.textContent = JSON.stringify(product, null, 2);
+  try {
+    const product = await ProductApi.getList();
+    result.textContent = JSON.stringify(product, null, 2);
+  } catch (error) {
+    handleError(error);
+  }
 });
 
 // ID에 해당하는 상품 가져오기
 productGet.addEventListener("click", async () => {
-  const product = await ProductApi.get(productIdInput.value);
-  result.textContent = JSON.stringify(product, null, 2);
+  try {
+    const product = await ProductApi.get(productIdInput.value);
+    result.textContent = JSON.stringify(product, null, 2);
+  } catch (error) {
+    handleError(error);
+  }
   productIdInput.value = "";
 });
 
@@ -43,8 +63,12 @@ productCreate.addEventListener("click", async (event) => {
           : input.value;
   });
 
-  const gettedProduct = await ProductApi.create(product);
-  result.textContent = JSON.stringify(gettedProduct, null, 2);
+  try {
+    const gettedProduct = await ProductApi.create(product);
+    result.textContent = JSON.stringify(gettedProduct, null, 2);
+  } catch (error) {
+    handleError(error);
+  }
 
   productsList.forEach((input) => (input.value = ""));
 });
@@ -66,8 +90,12 @@ productPatch.addEventListener("click", async (event) => {
 
   const productId = productIdInput.value;
 
-  const gettedProduct = await ProductApi.patch(productId, product);
-  result.textContent = JSON.stringify(gettedProduct, null, 2);
+  try {
+    const gettedProduct = await ProductApi.patch(productId, product);
+    result.textContent = JSON.stringify(gettedProduct, null, 2);
+  } catch (error) {
+    handleError(error);
+  }
 
   productIdInput.value = "";
   productsList.forEach((input) => (input.value = ""));
@@ -75,8 +103,12 @@ productPatch.addEventListener("click", async (event) => {
 
 // 상품 삭제
 productDelete.addEventListener("click", async () => {
-  const product = await ProductApi.remove(productIdInput.value);
-  result.textContent = JSON.stringify(product, null, 2);
+  try {
+    const product = await ProductApi.remove(productIdInput.value);
+    result.textContent = JSON.stringify(product, null, 2);
+  } catch (error) {
+    handleError(error);
+  }
   productIdInput.value = "";
 });
 
@@ -92,14 +124,22 @@ const articlesList = document.querySelectorAll("#articleForm input");
 
 // 아티클 리스트 가져오기
 articleListBtn.addEventListener("click", async () => {
-  const article = await ArticleApi.getList();
-  result.textContent = JSON.stringify(article, null, 2);
+  try {
+    const article = await ArticleApi.getList();
+    result.textContent = JSON.stringify(article, null, 2);
+  } catch (error) {
+    handleError(error);
+  }
 });
 
 // ID에 해당하는 아티클 가져오기
 articleGet.addEventListener("click", async () => {
-  const article = await ArticleApi.get(articleIdInput.value);
-  result.textContent = JSON.stringify(article, null, 2);
+  try {
+    const article = await ArticleApi.get(articleIdInput.value);
+    result.textContent = JSON.stringify(article, null, 2);
+  } catch (error) {
+    handleError(error);
+  }
   articleIdInput.value = "";
 });
 
@@ -111,8 +151,12 @@ articleCreate.addEventListener("click", async (event) => {
 
   articlesList.forEach((input) => (article[input.name] = input.value));
 
-  const res = await ArticleApi.create(article);
-  result.textContent = JSON.stringify(res, null, 2);
+  try {
+    const res = await ArticleApi.create(article);
+    result.textContent = JSON.stringify(res, null, 2);
+  } catch (error) {
+    handleError(error);
+  }
 
   articlesList.forEach((input) => (input.value = ""));
 });
@@ -127,8 +171,12 @@ articlePatch.addEventListener("click", async (event) => {
 
   const articleId = articleIdInput.value;
 
-  const res = await ArticleApi.patch(articleId, article);
-  result.textContent = JSON.stringify(res, null, 2);
+  try {
+    const res = await ArticleApi.patch(articleId, article);
+    result.textContent = JSON.stringify(res, null, 2);
+  } catch (error) {
+    handleError(error);
+  }
 
   articleIdInput.value = "";
   articlesList.forEach((input) => (input.value = ""));
@@ -136,7 +184,11 @@ articlePatch.addEventListener("click", async (event) => {
 
 // 아티클 삭제
 articleDelete.addEventListener("click", async () => {
-  const article = await ArticleApi.remove(articleIdInput.value);
-  result.textContent = JSON.stringify(article, null, 2);
+  try {
+    const article = await ArticleApi.remove(articleIdInput.value);
+    result.textContent = JSON.stringify(article, null, 2);
+  } catch (error) {
+    handleError(error);
+  }
   articleIdInput.value = "";
 });
