@@ -12,7 +12,7 @@ export const ArticleApi = {
 
 function getArticleList({ page = 1, pageSize = 5, keyword = "" } = {}) {
   return instance
-    .get(`/articles`, { params: { page, pageSize, keyword } })
+    .get("/articles", { params: { page, pageSize, keyword } })
     .then((response) => {
       return response.data;
     })

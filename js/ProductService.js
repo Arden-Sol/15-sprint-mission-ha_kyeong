@@ -50,7 +50,7 @@ async function getProduct(productId) {
 
 async function createProduct(productData) {
   try {
-    const response = await instance.post(`/products/`, productData);
+    const response = await instance.post("/products", productData);
 
     return response.data;
   } catch (error) {

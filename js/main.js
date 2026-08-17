@@ -2,8 +2,7 @@
 
 import { ProductApi } from "./ProductService.js";
 import { ArticleApi } from "./ArticleService.js";
-// 에러 -> alert으로
-// const articleBtn = document.querySelector("#article");
+
 const productListBtn = document.querySelector("#productList");
 const productIdInput = document.querySelector("#productIdInput");
 
@@ -12,16 +11,9 @@ const productDelete = document.querySelector("#productDelete");
 const productCreate = document.querySelector("#productCreate");
 const productPatch = document.querySelector("#productPatch");
 
-const products = document.querySelectorAll("#productForm input");
-const productsList = [...products];
+const productsList = document.querySelectorAll("#productForm input");
 
 const result = document.querySelector("#result");
-const reset = document.querySelector("#reset");
-
-// 초기화
-reset.addEventListener("click", () => {
-  result.textContent = "";
-});
 
 // 상품 리스트 가져오기
 productListBtn.addEventListener("click", async () => {
@@ -33,7 +25,7 @@ productListBtn.addEventListener("click", async () => {
 productGet.addEventListener("click", async () => {
   const product = await ProductApi.get(productIdInput.value);
   result.textContent = JSON.stringify(product, null, 2);
-  productIdInput.value = ""; // 해당 칸이 비어지는 지 확인
+  productIdInput.value = "";
 });
 
 // 상품 생성
@@ -46,11 +38,13 @@ productCreate.addEventListener("click", async (event) => {
     product[input.name] =
       input.name === "images" || input.name === "tags"
         ? input.value.split(",").map((item) => item.trim())
-        : input.value;
+        : input.name === "price"
+          ? Number(input.value)
+          : input.value;
   });
 
-  const res = await ProductApi.create(product);
-  result.textContent = JSON.stringify(res, null, 2);
+  const gettedProduct = await ProductApi.create(product);
+  result.textContent = JSON.stringify(gettedProduct, null, 2);
 
   productsList.forEach((input) => (input.value = ""));
 });
@@ -65,13 +59,15 @@ productPatch.addEventListener("click", async (event) => {
     product[input.name] =
       input.name === "images" || input.name === "tags"
         ? input.value.split(",").map((item) => item.trim())
-        : input.value;
+        : input.value === "price"
+          ? Number(input.value)
+          : input.value;
   });
 
   const productId = productIdInput.value;
 
-  const res = await ProductApi.patch(productId, product);
-  result.textContent = JSON.stringify(res, null, 2);
+  const gettedProduct = await ProductApi.patch(productId, product);
+  result.textContent = JSON.stringify(gettedProduct, null, 2);
 
   productIdInput.value = "";
   productsList.forEach((input) => (input.value = ""));
@@ -92,8 +88,7 @@ const articleDelete = document.querySelector("#articleDelete");
 const articleCreate = document.querySelector("#articleCreate");
 const articlePatch = document.querySelector("#articlePatch");
 
-const articles = document.querySelectorAll("#articleForm input");
-const articlesList = [...articles];
+const articlesList = document.querySelectorAll("#articleForm input");
 
 // 아티클 리스트 가져오기
 articleListBtn.addEventListener("click", async () => {
@@ -105,16 +100,16 @@ articleListBtn.addEventListener("click", async () => {
 articleGet.addEventListener("click", async () => {
   const article = await ArticleApi.get(articleIdInput.value);
   result.textContent = JSON.stringify(article, null, 2);
-  articleIdInput.value = ""; // 해당 칸이 비어지는 지 확인
+  articleIdInput.value = "";
 });
 
 // 아티클 생성
 articleCreate.addEventListener("click", async (event) => {
   event.preventDefault();
 
-  const article = new FormData();
+  const article = {};
 
-  articlesList.forEach((input) => article.append(input.name, input.value));
+  articlesList.forEach((input) => (article[input.name] = input.value));
 
   const res = await ArticleApi.create(article);
   result.textContent = JSON.stringify(res, null, 2);
@@ -126,9 +121,9 @@ articleCreate.addEventListener("click", async (event) => {
 articlePatch.addEventListener("click", async (event) => {
   event.preventDefault();
 
-  const article = new FormData();
+  const article = {};
 
-  articlesList.forEach((input) => article.append(input.name, input.value));
+  articlesList.forEach((input) => (article[input.name] = input.value));
 
   const articleId = articleIdInput.value;
 

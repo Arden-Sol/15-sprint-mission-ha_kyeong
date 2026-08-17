@@ -8,21 +8,27 @@
     <script src="./js/main.js" type="module" defer></script>
   </head>
   <body>
-    <button id="reset">초기화</button>
     <div class="productContainer">
       <h1>상품관련 API</h1>
-      <div>수정할 때는 아이디 칸도 채워주세요</div>
+      <div>
+        수정할 때는 아이디 칸도 채워주세요
+        <br />
+        <pre>
+        이미지 예시: https://picsum.photos/250/250
+      </pre
+        >
+      </div>
       <p>
         상품 리스트 가져오기:
         <button id="productList">product list</button>
       </p>
 
       <label for="productIdInput">Product Id</label>
-      <input type="text" id="productIdInput" />
-      <button type="submit" id="productGet">조회</button>
-      <button type="submit" id="productDelete">삭제</button>
+      <input type="number" id="productIdInput" />
+      <button type="button" id="productGet">조회</button>
+      <button type="button" id="productDelete">삭제</button>
 
-      <form action="#" id="productForm">
+      <form id="productForm">
         <label for="productName">Product name</label>
         <input name="name" type="text" id="productName" />
 
@@ -30,7 +36,7 @@
         <input name="description" type="text" id="productDescription" />
 
         <label for="productPrice">Product price</label>
-        <input name="price" type="text" id="productPrice" />
+        <input name="price" type="number" id="productPrice" />
 
         <label for="productImage">Product image</label>
         <input name="images" type="text" id="productImage" />
@@ -45,18 +51,25 @@
 
     <div class="articleContainer">
       <h1>아티클 관련 API</h1>
-      <div>수정할 때는 아이디 칸도 채워주세요</div>
+      <div>
+        수정할 때는 아이디 칸도 채워주세요
+        <br />
+        <pre>
+        이미지 예시: https://picsum.photos/250/250
+      </pre
+        >
+      </div>
       <p>
         아티클 리스트 가져오기:
         <button id="articleList">article list</button>
       </p>
 
       <label for="articleIdInput">article Id</label>
-      <input type="text" id="articleIdInput" />
-      <button type="submit" id="articleGet">조회</button>
-      <button type="submit" id="articleDelete">삭제</button>
+      <input type="number" id="articleIdInput" />
+      <button type="button" id="articleGet">조회</button>
+      <button type="button" id="articleDelete">삭제</button>
 
-      <form action="#" id="articleForm">
+      <form id="articleForm">
         <label for="articleTitle">article title</label>
         <input name="title" type="text" id="articleTitle" />
 
