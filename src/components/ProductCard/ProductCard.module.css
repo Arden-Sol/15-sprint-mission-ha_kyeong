@@ -63,3 +63,17 @@
     height: 26rem;
   }
 }
+
+/* 반응형 모바일 사이즈 */
+@media (max-width: 375px) {
+  .card {
+    width: 10.3rem;
+    height: 16.5rem;
+  }
+  .image {
+    height: 68%;
+  }
+  .best {
+    width: 100%;
+  }
+}

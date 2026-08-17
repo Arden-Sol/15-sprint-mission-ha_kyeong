@@ -64,7 +64,6 @@
     position: relative;
 
     & select {
-      /* width: 8rem; */
       height: 2.625rem;
       padding: 0.75rem 1.25rem;
       font-size: 1rem;
@@ -96,6 +95,9 @@
   background: #fff;
   outline: none;
 }
+.mobileSize {
+  display: none;
+}
 
 /* 태블릿 사이즈 */
 @media (max-width: 768px) {
@@ -124,4 +126,92 @@
   .select > select {
     width: 8rem;
   }
+}
+
+/* 반응형 모바일 사이즈 */
+@media (max-width: 375px) {
+  .main {
+    width: 92%;
+    padding-top: 1.5rem;
+  }
+
+  .productsTitle {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 2rem;
+    padding-bottom: 1.2rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+
+    & > h1 {
+      font-size: 1.25rem;
+      height: 2rem;
+      width: 12rem;
+    }
+
+    & > .input {
+      padding: 0;
+      position: relative;
+      order: 3;
+      width: 18rem;
+
+      & > input {
+        border-radius: 0.75rem;
+        width: 100%;
+        padding-left: 3rem;
+      }
+
+      & > svg {
+        position: absolute;
+        top: 0.7rem;
+        left: 1.2rem;
+      }
+    }
+
+    & > button {
+      height: 2.625rem;
+      padding: 0.75rem 1.4375rem;
+      /* margin: auto; */
+      font-size: 1rem;
+      line-height: 0rem;
+      order: 2;
+      margin: 0;
+    }
+
+    & > .select {
+      position: relative;
+      order: 4;
+      width: 2.7rem;
+
+      &::after {
+        content: '';
+      }
+
+      & select {
+        width: 100%;
+        padding: 0.4rem;
+        font-size: 1rem;
+        appearance: none;
+        color: transparent;
+      }
+
+      & svg {
+        position: absolute;
+        top: 0.75rem;
+        right: 0.83rem;
+        width: 1rem;
+        height: 1rem;
+        display: none;
+      }
+
+      & > .mobileSize {
+        display: block;
+        width: 1rem;
+        transform: scaleX(-1);
+      }
+    }
+  }
+}
+.option {
+  color: black;
 }

@@ -7,9 +7,10 @@ import { Footer } from './components/Footer/';
 import styles from './main.module.css';
 import { CiSearch } from 'react-icons/ci';
 import { FaCaretDown } from 'react-icons/fa';
+import { FaSortAmountDown } from 'react-icons/fa';
 
 const INITIAL_PAGE = 1;
-const PRODUCTS_PER_PAGE = 10;
+const PRODUCTS_PER_PAGE = 4;
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -110,6 +111,7 @@ function App() {
             <button>상품 등록하기</button>
             <div className={styles.select}>
               <FaCaretDown />
+              <FaSortAmountDown className={styles.mobileSize} />
               <select onChange={(e) => sortedProducts(e.target.value)}>
                 <option value="createdAt" className={styles.option}>
                   최신순

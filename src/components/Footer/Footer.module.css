@@ -48,3 +48,30 @@
     }
   }
 }
+
+/* 반응형 모바일 사이즈 */
+@media (max-width: 375px) {
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2rem 1rem;
+    justify-content: space-between;
+    height: 100%;
+    gap: 1.5rem;
+
+    & .footerCopyright {
+      order: 3;
+
+      white-space: nowrap;
+    }
+    & .footerLinks {
+      width: 10rem;
+      white-space: nowrap;
+      padding: 0;
+    }
+
+    & .footerSocial {
+      width: 8rem;
+    }
+  }
+}

@@ -13,7 +13,6 @@
 @media (max-width: 768px) {
   .cardList {
     width: 100%;
-    display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, auto);
     justify-content: space-between;
@@ -21,5 +20,21 @@
   .best {
     grid-template-columns: repeat(2, 1fr);
     justify-content: space-between;
+  }
+}
+
+/* 반응형 모바일 사이즈 */
+@media (max-width: 375px) {
+  .cardList {
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0;
+    row-gap: 2rem;
+    align-content: start;
+    justify-content: start;
+  }
+  .best {
+    display: flex;
+    flex-direction: column;
   }
 }
