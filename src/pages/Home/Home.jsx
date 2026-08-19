@@ -11,11 +11,9 @@ function Home() {
           <div className={styles.inner2}>
             <div className={styles.mainTitle}>
               <h1>
-                일상의 모든 물건을
-                <br />
-                거래해 보세요
+                <span>일상의 모든 물건을 </span>
+                <span>거래해 보세요</span>
               </h1>
-
               <a className={styles.searchBtn} href="./items.html">
                 구경하러 가기
               </a>
@@ -28,7 +26,7 @@ function Home() {
           </div>
         </section>
         <section>
-          <div className={styles.inner3}>
+          <div className={`${styles.inner3} ${styles.inner3first}`}>
             <img
               src="/images/home/img_home_01.png"
               alt="인기 상품을 확인해 보세요"
@@ -36,33 +34,29 @@ function Home() {
             <div className={styles.content}>
               <p className={styles.hotItem}>Hot item</p>
               <h1 className={styles.contentTitle}>
-                인기 상품을
-                <br />
-                확인해 보세요
+                <span>인기 상품을 </span>
+                <span>확인해 보세요</span>
               </h1>
               <p className={styles.description}>
-                가장 HOT한 중고거래 물품을
-                <br />
-                판다 마켓에서 확인해 보세요
+                <span>가장 HOT한 중고거래 물품을 </span>
+                <span>판다 마켓에서 확인해 보세요</span>
               </p>
             </div>
           </div>
         </section>
 
         <section>
-          <div className={styles.inner3}>
+          <div className={`${styles.inner3} ${styles.reverseContent}`}>
             <img src="/images/home/img_home_02.png" alt="상품을 검색하세요" />
             <div className={styles.content}>
               <p className={styles.hotItem}>Search</p>
               <h1 className={styles.contentTitle}>
-                구매를 원하는
-                <br />
-                상품을 검색하세요
+                <span>구매를 원하는 </span>
+                <span>상품을 검색하세요</span>
               </h1>
               <p className={styles.description}>
-                구매하고 싶은 물품은 검색에서
-                <br />
-                쉽게 찾아보세요
+                <span>구매하고 싶은 물품은 검색에서 </span>
+                <span>쉽게 찾아보세요</span>
               </p>
             </div>
           </div>
@@ -74,14 +68,13 @@ function Home() {
             <div className={styles.content}>
               <p className={styles.hotItem}>Register</p>
               <h1 className={styles.contentTitle}>
-                판매를 원하는
-                <br />
-                상품을 등록하세요
+                <span>판매를 원하는 </span>
+                <span>상품을 등록하세요</span>
               </h1>
               <p className={styles.description}>
-                어떤 물건이든 판매하고 싶은 상품을
-                <br />
-                쉽게 등록하세요
+                <span>어떤 물건이든 판매하고 싶은 상품을</span>
+
+                <span>쉽게 등록하세요</span>
               </p>
             </div>
           </div>
@@ -90,9 +83,8 @@ function Home() {
         <section className={styles.bottom}>
           <div className={styles.inner2}>
             <h1 className={styles.contentTitle}>
-              믿을 수 있는
-              <br />
-              판다마켓 중고 거래
+              <span>믿을 수 있는 </span>
+              <span>판다마켓 중고 거래</span>
             </h1>
             <img
               src="/images/home/img_home_bottom.png"
