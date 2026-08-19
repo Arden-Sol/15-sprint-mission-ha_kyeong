@@ -3,6 +3,7 @@
   font-weight: var(--font-weight-big);
   line-height: 1.625rem;
   padding-left: 2.5rem;
+  margin-right: auto;
 
   & a {
     margin-right: 1rem;
@@ -15,6 +16,7 @@
   .nav {
     padding: 0;
     align-self: start;
+    width: 6rem;
 
     & a {
       margin-right: 0.5rem;

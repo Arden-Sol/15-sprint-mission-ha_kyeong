@@ -11,3 +11,4 @@ function Nav() {
   );
 }
 export default Nav;
+// 네브의 스타일 수정
