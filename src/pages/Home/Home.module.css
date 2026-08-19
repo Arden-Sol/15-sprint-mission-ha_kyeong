@@ -1,0 +1,130 @@
+/* Main */
+.mainVisual {
+  background-color: var(--bg-color);
+  margin-top: 56px;
+  display: flex;
+}
+
+.inner2 {
+  width: 119rem;
+  height: 33rem;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.mainTitle {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 80px;
+}
+
+.mainVisualImg {
+  width: 46.625rem;
+  height: 21.25rem;
+}
+
+.mainVisual h1 {
+  color: var(--secondary-color-700);
+  font-size: var(--font-size-big);
+  font-weight: var(--font-weight-big);
+
+  font-size: 2.5rem;
+  line-height: 140%;
+  margin-bottom: 40px;
+  padding-right: 5rem;
+}
+
+.searchBtn {
+  color: var(--secondary-color-50);
+  background-color: var(--primary-color-100);
+  font-size: 1.25rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  height: 3.5rem;
+  padding: 1rem 7.75rem;
+}
+.inner2 .main-visual-img {
+  width: 46rem;
+  height: 21rem;
+}
+
+/* Section */
+.inner3 {
+  margin: 15rem auto;
+  width: 62rem;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-around;
+  background-color: #fcfcfc;
+}
+
+.inner3 img {
+  width: 36.75rem;
+  height: 27.75rem;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+}
+
+/* .contentTitle {
+  color: var(--secondary-color-700);
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 140%;
+  letter-spacing: 0.05rem;
+} */
+.contentTitle {
+  margin-top: 1.4rem;
+  margin-bottom: 1rem;
+  color: var(--secondary-color-700);
+  font-size: 2.5rem;
+  font-weight: var(--font-weight-big);
+  line-height: 140%;
+  letter-spacing: 0.05rem;
+}
+
+.hotItem {
+  color: var(--primary-color-100);
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-big);
+}
+
+.description {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-small);
+  line-height: 2rem;
+  color: var(--secondary-color-700);
+}
+
+/* Reverse */
+section:nth-child(3) .inner3 {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+/* Bottom */
+
+.bottom {
+  background-color: var(--bg-color);
+  display: flex;
+}
+
+.bottom .inner2 {
+  margin: 0 auto;
+}
+.bottom img {
+  width: 46.625rem;
+  height: 24.8125rem;
+}
+
+.bottom h1 {
+  align-self: center;
+  padding-top: 5rem;
+}
