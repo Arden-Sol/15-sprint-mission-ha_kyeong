@@ -1,0 +1,218 @@
+.main {
+  width: 74rem;
+  margin: 1.5rem auto 5rem;
+}
+
+.bestProductTitle {
+  color: var(--secondary-color-900);
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-big);
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-big);
+  padding-bottom: 1rem;
+}
+
+.productsTitle {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  padding-top: 2.5rem;
+  padding-bottom: 1.5rem;
+  gap: 0.75rem;
+  align-items: center;
+
+  & > h1 {
+    color: var(--secondary-color-900);
+    font-size: 1.25rem;
+    font-weight: var(--font-weight-big);
+  }
+
+  & > .input {
+    padding: 0.5625rem 1.25rem 0.5625rem 1rem;
+    position: relative;
+    padding-right: 0;
+
+    & > input {
+      border-radius: 0.75rem;
+      background-color: var(--secondary-color-100);
+      width: 19rem;
+      height: 2.625rem;
+      border: none;
+      outline: none;
+      padding-left: 2.5rem;
+    }
+
+    & > svg {
+      position: absolute;
+      top: 1.35rem;
+      left: 2rem;
+    }
+  }
+
+  & > button {
+    height: 2.625rem;
+    padding: 0.75rem 1.4375rem;
+    margin: auto;
+    border-radius: 0.5rem;
+    background: var(--primary-color-100);
+    color: var(--secondary-color-100);
+    font-size: 1rem;
+    font-weight: var(--font-weight-normal);
+    line-height: 1.35rem;
+  }
+
+  & > .select {
+    position: relative;
+
+    & select {
+      height: 2.625rem;
+      padding: 0.75rem 1.25rem;
+      font-size: 1rem;
+      border-radius: 0.75rem;
+      border: 1px solid var(--secondary-color-200);
+      background: #fff;
+      appearance: none;
+
+      &:focus {
+        border: 1px solid var(--secondary-color-200);
+        outline: none;
+      }
+    }
+
+    & svg {
+      position: absolute;
+      top: 0.6rem;
+      right: 1rem;
+      width: 1.3rem;
+      height: 1.4rem;
+      pointer-events: none;
+    }
+  }
+}
+
+.option {
+  border-radius: 1rem;
+  border: 1px solid var(--secondary-color-200);
+  background: #fff;
+  outline: none;
+}
+.mobileSize {
+  display: none;
+}
+
+/* 태블릿 사이즈 */
+@media (max-width: 768px) {
+  .main {
+    width: 43.4rem;
+  }
+
+  .productsTitle {
+    grid-template-columns: repeat(4, 1fr);
+    font-size: 1rem;
+
+    & > h1 {
+      font-size: 1.25rem;
+    }
+
+    & > .input > input {
+      width: 14rem;
+    }
+
+    & > button {
+      font-size: 0.9rem;
+      font-weight: var(--font-weight-small);
+    }
+  }
+
+  .select > select {
+    width: 8rem;
+  }
+}
+
+/* 반응형 모바일 사이즈 */
+@media (max-width: 375px) {
+  .main {
+    width: 92%;
+    padding-top: 1.5rem;
+  }
+
+  .productsTitle {
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 2rem;
+    padding-bottom: 1.2rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+
+    & > h1 {
+      font-size: 1.25rem;
+      height: 2rem;
+      width: 12rem;
+    }
+
+    & > .input {
+      padding: 0;
+      position: relative;
+      order: 3;
+      width: 18rem;
+
+      & > input {
+        border-radius: 0.75rem;
+        width: 100%;
+        padding-left: 3rem;
+      }
+
+      & > svg {
+        position: absolute;
+        top: 0.7rem;
+        left: 1.2rem;
+      }
+    }
+
+    & > button {
+      height: 2.625rem;
+      padding: 0.75rem 1.4375rem;
+      /* margin: auto; */
+      font-size: 1rem;
+      line-height: 0rem;
+      order: 2;
+      margin: 0;
+    }
+
+    & > .select {
+      position: relative;
+      order: 4;
+      width: 2.7rem;
+
+      &::after {
+        content: '';
+      }
+
+      & select {
+        width: 100%;
+        padding: 0.4rem;
+        font-size: 1rem;
+        appearance: none;
+        color: transparent;
+      }
+
+      & svg {
+        position: absolute;
+        top: 0.75rem;
+        right: 0.83rem;
+        width: 1rem;
+        height: 1rem;
+        display: none;
+      }
+
+      & > .mobileSize {
+        display: block;
+        width: 1rem;
+        transform: scaleX(-1);
+      }
+    }
+  }
+}
+.option {
+  color: black;
+}

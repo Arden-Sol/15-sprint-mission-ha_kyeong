@@ -3,7 +3,7 @@ import { PaginationButton } from './components/PaginationButton';
 import { useState } from 'react';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import styles from './main.module.css';
+import styles from './Market.module.css';
 import { CiSearch } from 'react-icons/ci';
 import { FaCaretDown } from 'react-icons/fa';
 import { FaSortAmountDown } from 'react-icons/fa';
