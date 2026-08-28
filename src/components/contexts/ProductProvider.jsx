@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { ProductContext } from './ProductContext.jsx';
-import { getProducts } from '../api/productApi.js';
+import { productApi } from '../api/productApi.js';
 import usePagination from '../hooks/usePagination.js';
 
 function ProductProvider({ children }) {
@@ -13,7 +13,8 @@ function ProductProvider({ children }) {
   } = usePagination();
 
   const [products, setProducts] = useState([]);
-
+  const [keyword, setKeyword] = useState('');
+  const [sort, setSort] = useState('resent');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -22,9 +23,11 @@ function ProductProvider({ children }) {
       setError(null);
       setIsLoading(true);
       try {
-        const { list, totalCount } = await getProducts({
-          page: currentPage,
-          pageSize: productsPerPage,
+        const { list, totalCount } = await productApi.get({
+          offset: currentPage,
+          limit: productsPerPage,
+          keyword: keyword,
+          sort: sort,
         });
         setProducts(list);
         setTotalProducts(totalCount);
@@ -35,7 +38,7 @@ function ProductProvider({ children }) {
       }
     };
     getProductsList();
-  }, [currentPage, productsPerPage, setTotalProducts]);
+  }, [currentPage, productsPerPage, setTotalProducts, keyword, sort]);
 
   if (isLoading) {
     return <div className="spinner"></div>;
@@ -49,9 +52,9 @@ function ProductProvider({ children }) {
     products,
     totalPages,
     goToPage,
-    setProducts,
     currentPage,
-    productsPerPage,
+    setSort,
+    setKeyword,
   };
 
   return (

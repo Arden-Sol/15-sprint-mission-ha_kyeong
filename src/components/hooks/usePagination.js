@@ -17,6 +17,7 @@ function usePagination() {
     const tabletQuery = window.matchMedia('(max-width: 768px)');
 
     const handleChange = () => {
+      setCurrentPage(INITIAL_PAGE);
       if (mobileQuery.matches) {
         setProductsPerPage(4);
       } else if (tabletQuery.matches) {
@@ -35,7 +36,7 @@ function usePagination() {
       mobileQuery.removeEventListener('change', handleChange);
       tabletQuery.removeEventListener('change', handleChange);
     };
-  }, []);
+  }, [productsPerPage]);
 
   const value = {
     currentPage,

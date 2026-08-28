@@ -1,6 +1,7 @@
-import Header from '../../components/Header/Header.jsx';
-import Footer from '../../components/Footer/Footer.jsx';
+import Header from '@/components/Header/Header.jsx';
+import Footer from '@/components/Footer/Footer.jsx';
 import styles from './Home.module.css';
+import { Link } from 'react-router-dom';
 
 function Home() {
   return (
@@ -14,9 +15,9 @@ function Home() {
                 <span>일상의 모든 물건을 </span>
                 <span>거래해 보세요</span>
               </h1>
-              <a className={styles.searchBtn} href="./items.html">
+              <Link to="/Items" className={styles.searchBtn}>
                 구경하러 가기
-              </a>
+              </Link>
             </div>
             <img
               className={styles.mainVisualImg}

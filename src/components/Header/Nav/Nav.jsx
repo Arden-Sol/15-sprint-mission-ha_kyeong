@@ -1,14 +1,16 @@
+import { Link } from 'react-router-dom';
 import styles from './Nav.module.css';
 
-function Nav() {
+function Nav({ classNameAdd }) {
   return (
     <>
       <nav className={styles.nav}>
-        <a href="#">자유 게시판</a>
-        <a href="#">중고마켓</a>
+        <Link to="#">자유게시판</Link>
+        <Link to="/Items" className={styles[classNameAdd]}>
+          중고마켓
+        </Link>
       </nav>
     </>
   );
 }
 export default Nav;
-// 네브의 스타일 수정

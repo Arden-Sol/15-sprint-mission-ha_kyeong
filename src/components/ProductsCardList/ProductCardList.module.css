@@ -3,6 +3,7 @@
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, auto);
   gap: 1rem;
+  row-gap: 2rem;
 }
 .best {
   grid-template-columns: repeat(4, 1fr);
@@ -15,7 +16,7 @@
     width: 100%;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, auto);
-    justify-content: space-between;
+    /* justify-content: space-between; */
   }
   .best {
     grid-template-columns: repeat(2, 1fr);
