@@ -36,7 +36,7 @@ function Registration() {
 
     try {
       const res = await productApi.post(productData);
-      // 받아온 데이터에 statusCode가 없어서
+      // 데이터에 statusCode가 없어서
       // 아이디의 존재로 성공여부 확인
       res.id && navigate('/ProductDetail');
     } catch {
@@ -112,6 +112,7 @@ function Registration() {
               placeholder="상품명을 입력해주세요"
               value={name}
               onChange={(e) => checkName(e)}
+              className={`${validErrorName ? styles.errorInput : ''}`}
             />
             <p
               className={`${validErrorName ? styles.errorMessage : ''} ${styles.errorName}`}
@@ -129,6 +130,7 @@ function Registration() {
               placeholder="상품 소개를 입력해주세요"
               value={description}
               onChange={(e) => checkDescription(e)}
+              className={`${validErrorDescription ? styles.errorInput : ''}`}
             />
             <p
               className={`${validErrorDescription ? styles.errorMessage : ''} ${styles.errorDescription}`}
@@ -146,6 +148,7 @@ function Registration() {
               placeholder="판매 가격을 입력해주세요"
               value={price}
               onChange={(e) => checkPrice(e)}
+              className={`${validErrorPrice ? styles.errorInput : ''}`}
             />
             <p
               className={`${validErrorPrice ? styles.errorMessage : ''} ${styles.errorPrice}`}
@@ -164,6 +167,7 @@ function Registration() {
               value={input}
               onChange={(e) => checkTags(e)}
               onKeyDown={(e) => makeChips(e)}
+              className={`${validErrorTag ? styles.errorInput : ''}`}
             />
             <p
               className={`${validErrorTag ? styles.errorMessage : ''} ${styles.errorTags}`}

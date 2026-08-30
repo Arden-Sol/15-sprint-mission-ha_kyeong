@@ -51,6 +51,7 @@
     border: 1px solid transparent;
     border-radius: 0.75rem;
     background-color: var(--secondary-color-100);
+    border: 1px solid transparent;
 
     &::placeholder {
       color: var(--secondary-color-400);
@@ -58,6 +59,10 @@
       font-weight: 400;
       line-height: 1.625rem;
     }
+  }
+
+  & > .errorInput {
+    border: 1px solid red;
   }
 
   & > p {
