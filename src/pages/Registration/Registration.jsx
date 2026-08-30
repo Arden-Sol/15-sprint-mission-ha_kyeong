@@ -5,19 +5,26 @@ import styles from './Registration.module.css';
 import { useState } from 'react';
 import { productApi } from '../../components/api/productApi.js';
 import { useNavigate } from 'react-router-dom';
+import useProductValidate from '../../components/hooks/useProductValidate.js';
 
 function Registration() {
   const navigate = useNavigate();
+  const {
+    validateName,
+    validateDescription,
+    validatePrice,
+    validateTags,
+    validErrorName,
+    validErrorDescription,
+    validErrorPrice,
+    validErrorTag,
+  } = useProductValidate();
 
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
   const [input, setInput] = useState('');
   const [tags, setTags] = useState([]);
-  const [validErrorName, setValidErrorName] = useState(false);
-  const [validErrorDescription, setValidErrorDescription] = useState(false);
-  const [validErrorPrice, setValidErrorPrice] = useState(false);
-  const [validErrorTag, setValidErrorTag] = useState(false);
 
   const submit = async (event) => {
     event.preventDefault();
@@ -47,35 +54,26 @@ function Registration() {
   const checkName = (e) => {
     const value = e.target.value.trim();
     setName(value);
-    setValidErrorName(!value || value.length > 10);
+    validateName(value);
   };
 
   const checkDescription = (e) => {
     const value = e.target.value;
     setDescription(value);
-    setValidErrorDescription(!value || value.length > 100 || value.length < 10);
+    validateDescription(value);
   };
 
   const checkPrice = (e) => {
     setPrice(e.target.value);
     const value = Number(e.target.value.trim());
-    setValidErrorPrice(
-      !value || Number.isNaN(value) || value < 1 || !Number.isInteger(value),
-    );
+    validatePrice(value);
   };
 
-  // 태그는 선택 입력
   const checkTags = (e) => {
     const value = e.target.value.trim();
     setInput(value);
     const isDuplicate = tags.some((tag) => tag === value);
-    if (value.length > 5) {
-      setValidErrorTag('length');
-    } else if (isDuplicate) {
-      setValidErrorTag('duplicate');
-    } else {
-      setValidErrorTag(false);
-    }
+    validateTags(value, isDuplicate);
   };
 
   const makeChips = (e) => {
