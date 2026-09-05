@@ -79,6 +79,10 @@ function Registration() {
   };
 
   const makeChips = (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      e.stopPropagation();
+    }
     if (e.key === 'Enter' && input.trim() && !validErrorTag) {
       setTags((tag) => [...tag, input.trim()]);
       setInput('');
@@ -95,7 +99,7 @@ function Registration() {
         <Nav></Nav>
       </Header>
       <main className={styles.main}>
-        <form className={styles.product} onSubmit={submit}>
+        <form className={styles.product} onSubmit={(e) => submit(e)}>
           <div className={styles.productHeader}>
             <h1 className={styles.title}>상품 등록하기</h1>
             <button
