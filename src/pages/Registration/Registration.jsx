@@ -26,22 +26,21 @@ function Registration() {
   const [input, setInput] = useState('');
   const [tags, setTags] = useState([]);
 
+  const validSubmit =
+    !name ||
+    validErrorName ||
+    !description ||
+    validErrorDescription ||
+    !price ||
+    validErrorPrice ||
+    !tags ||
+    validErrorTag;
+
   const submit = async (event) => {
     event.preventDefault();
     const parsedPrice = Number(price);
 
-    if (
-      !name ||
-      validErrorName ||
-      !description ||
-      validErrorDescription ||
-      !price ||
-      validErrorPrice ||
-      !tags ||
-      validErrorTag
-    ) {
-      return;
-    }
+    if (validSubmit) return;
 
     const productData = { name, description, price: parsedPrice, tags };
 
@@ -98,7 +97,10 @@ function Registration() {
         <form className={styles.product} onSubmit={submit}>
           <div className={styles.productHeader}>
             <h1 className={styles.title}>상품 등록하기</h1>
-            <button type="submit" className={styles.submit}>
+            <button
+              type="submit"
+              className={`${styles.submit} ${!validSubmit ? styles.submitActive : ''}`}
+            >
               등록
             </button>
           </div>
@@ -113,7 +115,6 @@ function Registration() {
               value={name}
               onChange={(e) => checkName(e)}
               className={`${validErrorName ? styles.errorInput : ''}`}
-              onBlur={console.log(name)}
             />
             <p
               className={`${validErrorName ? styles.errorMessage : ''} ${styles.errorName}`}
