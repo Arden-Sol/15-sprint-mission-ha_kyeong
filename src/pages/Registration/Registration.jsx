@@ -43,9 +43,7 @@ function Registration() {
 
     try {
       const res = await productApi.post(productData);
-      // 데이터에 statusCode가 없어서
-      // 아이디의 존재로 성공여부 확인
-      res.id && navigate('/ProductDetail');
+      res.data?.id && navigate('/ProductDetail');
     } catch {
       navigate('/ErrorPage');
     }
