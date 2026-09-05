@@ -46,7 +46,8 @@ function Registration() {
 
     try {
       const res = await productApi.post(productData);
-      res.data?.id && navigate('/ProductDetail');
+      res.data?.id && navigate('/ProductDetail', { replace: true });
+      navigate('/ProductDetail');
     } catch {
       navigate('/ErrorPage');
     }
