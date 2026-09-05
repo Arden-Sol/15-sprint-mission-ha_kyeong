@@ -44,6 +44,7 @@ function usePagination() {
     totalPages,
     goToPage,
     productsPerPage,
+    setCurrentPage,
   };
 
   return value;

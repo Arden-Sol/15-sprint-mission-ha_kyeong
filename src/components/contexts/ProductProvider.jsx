@@ -10,6 +10,7 @@ function ProductProvider({ children }) {
     totalPages,
     goToPage,
     productsPerPage,
+    setCurrentPage,
   } = usePagination();
 
   const [products, setProducts] = useState([]);
@@ -17,6 +18,16 @@ function ProductProvider({ children }) {
   const [sort, setSort] = useState('desc');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const handleKeyword = (value) => {
+    setKeyword(value);
+    setCurrentPage(1);
+  };
+
+  const handleSort = (value) => {
+    setSort(value);
+    setCurrentPage(1);
+  };
 
   useEffect(() => {
     const getProductsList = async () => {
@@ -53,8 +64,8 @@ function ProductProvider({ children }) {
     totalPages,
     goToPage,
     currentPage,
-    setSort,
-    setKeyword,
+    setSort: handleSort,
+    setKeyword: handleKeyword,
   };
 
   return (
