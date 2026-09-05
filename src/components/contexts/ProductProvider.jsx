@@ -14,7 +14,7 @@ function ProductProvider({ children }) {
 
   const [products, setProducts] = useState([]);
   const [keyword, setKeyword] = useState('');
-  const [sort, setSort] = useState('resent');
+  const [sort, setSort] = useState('desc');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
@@ -24,7 +24,7 @@ function ProductProvider({ children }) {
       setIsLoading(true);
       try {
         const { list, totalCount } = await productApi.get({
-          offset: currentPage,
+          offset: (currentPage - 1) * productsPerPage,
           limit: productsPerPage,
           keyword: keyword,
           sort: sort,
