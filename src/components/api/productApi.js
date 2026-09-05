@@ -6,9 +6,9 @@ const instance = axios.create({
   baseURL: 'http://localhost:5001',
 });
 
-async function getProducts({ offset = 1, limit = 10, orderBy, keyword }) {
+async function getProducts({ offset = 1, limit = 10, sort, keyword }) {
   const res = await instance.get('/products', {
-    params: { offset, limit, orderBy, keyword },
+    params: { offset, limit, sort, keyword },
   });
 
   return await res.data;
