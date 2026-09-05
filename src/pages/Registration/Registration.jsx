@@ -31,9 +31,13 @@ function Registration() {
     const parsedPrice = Number(price);
 
     if (
+      !name ||
       validErrorName ||
+      !description ||
       validErrorDescription ||
+      !price ||
       validErrorPrice ||
+      !tags ||
       validErrorTag
     ) {
       return;
@@ -109,6 +113,7 @@ function Registration() {
               value={name}
               onChange={(e) => checkName(e)}
               className={`${validErrorName ? styles.errorInput : ''}`}
+              onBlur={console.log(name)}
             />
             <p
               className={`${validErrorName ? styles.errorMessage : ''} ${styles.errorName}`}
